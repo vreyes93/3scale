@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: threescale-camel-service-config
+data:
+  camel-proxy-service.port.nonsecure: '9090'
+  camel-proxy-service.port.secure: '9443'
+  camel-proxy-service.keystore.mount-path: /mnt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: threescale-camel-service-secret
+stringData:
+  camel-proxy-service.keystore.passphrase: P@ssw0rd
+  quarkus.oidc-client.auth-server-url: https://sso.apps.ocp4.jnyilimb.eu/realms/demo
+  quarkus.oidc-client.client-id: threescale-camel-service
+  quarkus.oidc-client.credentials.secret: vebmUALy0SuPhTsj5v0aJFyuafIbjhnx
+  quarkus.otel.exporter.otlp.traces.endpoint: http://otel-collector.observability.svc:4317
+type: Opaque
